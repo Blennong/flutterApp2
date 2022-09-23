@@ -1,13 +1,12 @@
+import 'dart:convert';
+
+
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
+
 class Principal extends StatelessWidget {
   const Principal({super.key});
-
-  void obtValores(){
-    String url = '';
-  }
-
 
 
   Widget cuadro1(String text, int valor){
