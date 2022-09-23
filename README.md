@@ -1,6 +1,6 @@
 # trabajo_2
 
-A new Flutter project.
+Trabajo N° 2 del Taller de Desarrollo Web y Mobile.
 
 ## Getting Started
 
