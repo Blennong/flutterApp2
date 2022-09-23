@@ -70,40 +70,13 @@ class _HomeState extends State<Home> {
     }
   }
 
-  Widget cuadro1(String text, String? valor) {
-    return Padding(
-      padding: const EdgeInsets.all(16.0),
-      child: Container(
-        width: double.infinity,
-        height: 100,
-        padding: const EdgeInsets.all(2),
-        alignment: Alignment.center,
-        decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(10),
-            gradient: LinearGradient(colors: [
-              Colors.green,
-              Colors.green[200]!,
-            ])),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(
-              valor.toString(),
-              style: const TextStyle(fontSize: 30),
-            ),
-            Center(child: Text(text)),
-          ],
-        ),
-      ),
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     print("pase por aca");
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         onPressed: () {
+          //Refresca el widget
           setState(() {});
         },
         tooltip: 'Increment',
@@ -115,85 +88,207 @@ class _HomeState extends State<Home> {
         elevation: 0,
         centerTitle: true,
         title: const Text(
-          "Indicadores",
+          "Últimos 3 sismos registrados",
           style: TextStyle(color: Colors.black),
         )),
       body: SafeArea(
-        child: Column(
-          children: [
-            FutureBuilder<SismosDto>(
-              future: obtValoresIndex0(),
-              builder: (context, snapshot) {
-                if (snapshot.hasData) {
-                  return Container(
-                    child: Card(
+        child: Center(
+          child: Column(
+            children: [
+              const SizedBox(height: 15,),
+              FutureBuilder<SismosDto>(
+                future: obtValoresIndex0(),
+                builder: (context, snapshot) {
+                  if (snapshot.hasData) {
+                    return Card(
+                      margin: const EdgeInsets.fromLTRB(0, 10, 0, 10),
+                      color: Colors.blue[300],
                       child: SizedBox(
                         width: 300,
-                        height: 100,
+                        height: 130,
                         child: Column(
-                          children: [
-                            Text(
-                              'Fecha : ' + snapshot.data!.fecha.toString()
-                            ),
-                            Text(
-                              'Magnitud' + snapshot.data!.magnitud.toString()
-                            ),
-                            Text(
-                              'Profundidad' + snapshot.data!.profundidad.toString()
-                            ),
-                            Text(
-                              'Lugar' + snapshot.data!.refGeografica.toString()
-                            ),
-                          ],
                           mainAxisAlignment: MainAxisAlignment.center,
                           crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.fromLTRB(10, 4, 0, 4),
+                              child: Text(
+                                'Fecha: ${snapshot.data!.fecha}',
+                                style: const TextStyle(
+                                  color: Colors.white
+                                ),
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.fromLTRB(10, 4, 0, 2),
+                              child: Text(
+                                'Magnitud: ${snapshot.data!.magnitud}',
+                                style: const TextStyle(
+                                  color: Colors.white
+                                ),
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.fromLTRB(10, 4, 0, 2),
+                              child: Text(
+                                'Profundidad: ${snapshot.data!.profundidad}',
+                                style: const TextStyle(
+                                  color: Colors.white
+                                ),
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.fromLTRB(10, 4, 0, 2),
+                              child: Text(
+                                'Lugar: ${snapshot.data!.refGeografica}',
+                                style: const TextStyle(
+                                  color: Colors.white
+                                ),
+                              ),
+                            ),
+                          ],
                         ),           
                       ),
-                    color: Colors.green,
-                    ),
-                  );
-                } else if (snapshot.hasError) {
-                    print(snapshot);
+                    );
+                  } else if (snapshot.hasError) {
+                    // print(snapshot);
                     print("Error");
+                  }
+                  return const Center(
+                    child: CircularProgressIndicator(),
+                  );
                 }
-                return const Center(
-                  child: CircularProgressIndicator(),
-                );
-              }),
-            FutureBuilder<SismosDto>(
+              ),
+              const SizedBox(height: 15,),
+              FutureBuilder<SismosDto>(
                 future: obtValoresIndex1(),
                 builder: (context, snapshot) {
                   if (snapshot.hasData) {
-                    return Column(children: [
-                      cuadro1("Valor Uf", snapshot.data!.magnitud),
-                      const SizedBox(height: 20),
-                    ]);
+                    return Card(
+                      color: Colors.green[300],
+                      margin: const EdgeInsets.fromLTRB(0, 10, 0, 10),
+                      child: SizedBox(
+                        width: 300,
+                        height: 130,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.fromLTRB(10, 4, 0, 4),
+                              child: Text(
+                                'Fecha: ${snapshot.data!.fecha}',
+                                style: const TextStyle(
+                                  color: Colors.white
+                                ),
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.fromLTRB(10, 4, 0, 2),
+                              child: Text(
+                                'Magnitud: ${snapshot.data!.magnitud}',
+                                style: const TextStyle(
+                                  color: Colors.white
+                                ),
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.fromLTRB(10, 4, 0, 2),
+                              child: Text(
+                                'Profundidad: ${snapshot.data!.profundidad}',
+                                style: const TextStyle(
+                                  color: Colors.white
+                                ),
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.fromLTRB(10, 4, 0, 2),
+                              child: Text(
+                                'Lugar: ${snapshot.data!.refGeografica}',
+                                style: const TextStyle(
+                                  color: Colors.white
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),           
+                      ),
+                    );
                   } else if (snapshot.hasError) {
-                    print(snapshot);
+                    // print(snapshot);
                     print("Error");
                   }
                   return const Center(
                     child: CircularProgressIndicator(),
                   );
-                }),
-            FutureBuilder<SismosDto>(
+                }
+              ),
+              const SizedBox(height: 15,),
+              FutureBuilder<SismosDto>(
                 future: obtValoresIndex2(),
                 builder: (context, snapshot) {
                   if (snapshot.hasData) {
-                    return Column(children: [
-                      cuadro1("Valor Uf", snapshot.data!.magnitud),
-                      const SizedBox(height: 20),
-                    ]);
+                    return Card(
+                      margin: const EdgeInsets.fromLTRB(0, 10, 0, 10),
+                      color: Colors.amber[800],
+                      child: SizedBox(
+                        width: 300,
+                        height: 130,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.fromLTRB(10, 4, 0, 4),
+                              child: Text(
+                                'Fecha: ${snapshot.data!.fecha}',
+                                style: const TextStyle(
+                                  color: Colors.white
+                                ),
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.fromLTRB(10, 4, 0, 2),
+                              child: Text(
+                                'Magnitud: ${snapshot.data!.magnitud}',
+                                style: const TextStyle(
+                                  color: Colors.white
+                                ),
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.fromLTRB(10, 4, 0, 2),
+                              child: Text(
+                                'Profundidad: ${snapshot.data!.profundidad}',
+                                style: const TextStyle(
+                                  color: Colors.white
+                                ),
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.fromLTRB(10, 4, 0, 2),
+                              child: Text(
+                                'Lugar: ${snapshot.data!.refGeografica}',
+                                style: const TextStyle(
+                                  color: Colors.white
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),           
+                      ),
+                    );
                   } else if (snapshot.hasError) {
-                    print(snapshot);
+                    // print(snapshot);
                     print("Error");
                   }
                   return const Center(
                     child: CircularProgressIndicator(),
                   );
-                }),
-                
-          ],
+                }
+              ),
+            ],
+          ),
         ),
       ),
     );

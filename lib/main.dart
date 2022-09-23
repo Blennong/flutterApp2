@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:trabajo_2/pages/home.dart';
-import 'package:trabajo_2/pages/principal.dart';
 
 void main() {
   runApp(const MyApp());
@@ -13,7 +12,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Solemne 2 UNAB',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
